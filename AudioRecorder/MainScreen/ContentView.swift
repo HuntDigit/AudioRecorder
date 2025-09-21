@@ -41,8 +41,7 @@ struct ContentView: View {
             }
         }
         .onChange(of: model.segment) {
-            model.updateListOfFiles()
-            audioPlayer.updateAudioFiles(model.litOfFiles)
+            updateExistingContentIfAvailable()
         }
         .onChange(of: model.sourceType) {
             taskUpdate()
@@ -52,6 +51,7 @@ struct ContentView: View {
         }
         .onAppear() {
             taskSetup()
+            updateExistingContentIfAvailable()
         }
         .frame(minWidth: 600, maxWidth: 600, minHeight: 400, maxHeight: 400)
     }
@@ -167,6 +167,10 @@ struct ContentView: View {
         model.segment == 0 ? "?" : "[\(model.segment)]"
     }
     
+    func updateExistingContentIfAvailable() {
+        model.updateListOfFiles()
+        audioPlayer.updateAudioFiles(model.litOfFiles)
+    }
 }
 
 extension ContentView {

@@ -10,44 +10,34 @@ import AVFoundation
 
 final class AudioPlayer: ObservableObject {
     private var player: AVQueuePlayer?
-    private var items: [AVPlayerItem] = []
+    private var urls: [URL] = []
 
     @Published var isPlaying: Bool = false
     
     init(audioFiles: [URL] = []) {
-        loadAudioFiles(audioFiles)
+        urls = audioFiles
     }
 
     func updateAudioFiles(_ newAudioFiles: [URL]) {
-        loadAudioFiles(newAudioFiles)
+        urls = newAudioFiles
     }
     
     func play() {
-        isPlaying = true
-        guard !items.isEmpty else {
-            print("No audio")
-            return
-        }
-        player?.pause()
-        player?.removeAllItems()
+        if urls.isEmpty { print("No audio"); return }
         if player == nil {
             player = AVQueuePlayer()
         }
-        for item in items {
-            player?.insert(item, after: nil)
-        }
+ 
+        // Recreate the list to reset the cache and start playback from the beginning.
+        urls.forEach { player?.insert(.init(url: $0), after: nil) }
+ 
         player?.play()
+        isPlaying = true
     }
 
     func stop() {
-        isPlaying = false
         player?.pause()
         player?.removeAllItems()
-    }
-}
-
-private extension AudioPlayer {
-    private func loadAudioFiles(_ audioFiles: [URL]) {
-        items = audioFiles.map { AVPlayerItem(url: $0) }
+        isPlaying = false
     }
 }
