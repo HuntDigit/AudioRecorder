@@ -14,8 +14,10 @@ struct AudioRecorderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(model: diManager.systemAudioRecorder)
+            AudioRecorderView(model: diManager.systemAudioRecorder)
         }
+        .windowResizability(.contentSize)
+        .defaultSize(width: 600, height: 400)
                 
         MenuBarExtra("Segment duration", systemImage: "wrench.fill") {
             ForEach(SegmentDurationSlot.allCases, id: \.self) { type in

@@ -35,14 +35,14 @@ class SegmentedAudioWriter {
     init(configuration: AudioSettingsConfig, audioFileManager: AudioFileManager) {
         self.audioFileManager = audioFileManager
         self.segmentDuration = CMTime(seconds: configuration.segmentDurationSeconds,
-                                      preferredTimescale: 600) // Apple often uses 600 as the "default" timescale, let it be
+                                      preferredTimescale: AudioTool.defaultPreferredTimescale) 
         self.sampleRate = configuration.sampleRate
         self.channels = configuration.channelCount
     }
     
     func updateSegmentDuration(to newDuration: Double) {
         self.segmentDuration = CMTime(seconds: newDuration,
-                                      preferredTimescale: 600)
+                                      preferredTimescale: AudioTool.defaultPreferredTimescale)
     }
     
     func getListOfAudioFiles() -> [URL] {
@@ -52,7 +52,7 @@ class SegmentedAudioWriter {
     private func newOutputURL() -> URL {
         segmentIndex += 1
         currentSegmentindex.send(segmentIndex)
-        return audioFileManager.setFilenameForCurrentDirectory("segment_\(segmentIndex)")
+        return audioFileManager.setFilenameForCurrentDirectory("audio_system_\(segmentIndex)")
     }
     
     private func setupWriter(url: URL , startSessionTime: CMTime) throws {
@@ -96,11 +96,11 @@ class SegmentedAudioWriter {
     }
     
     func append(_ sampleBuffer: CMSampleBuffer) {
-        guard let pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer).isValid
-                ? Optional(CMSampleBufferGetPresentationTimeStamp(sampleBuffer))
-                : nil else { return }
+        // Simple validation check
+        let pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+        guard pts.isValid else { return }
         
-        // Start first segment
+        // Start first segment 
         if writer == nil {
             try? startNewSegment(at: pts)
         }

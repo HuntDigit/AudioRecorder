@@ -34,7 +34,6 @@ final class DependenciesManager {
     
     private var _systemAudioRecorder: SystemAudioRecorder?
     private var _audioFileManager: AudioFileManager?
-
 }
 
 private extension DependenciesManager {
@@ -48,8 +47,8 @@ private extension DependenciesManager {
         return SystemAudioRecorder(audioWriter: writer)
     }
     
-    func makeSegmentedAudioWriter(config: AudioSettingsConfig,
-                                          audioFileManager: AudioFileManager) -> SegmentedAudioWriter {
+    func makeSegmentedAudioWriter(config: AudioSettingsConfig,        
+                                  audioFileManager: AudioFileManager) -> SegmentedAudioWriter {
         return SegmentedAudioWriter(configuration: .defaultConfig,
                                     audioFileManager: audioFileManager)
     }

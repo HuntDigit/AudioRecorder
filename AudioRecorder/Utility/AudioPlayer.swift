@@ -13,10 +13,6 @@ final class AudioPlayer: ObservableObject {
     private var urls: [URL] = []
 
     @Published var isPlaying: Bool = false
-    
-    init(audioFiles: [URL] = []) {
-        urls = audioFiles
-    }
 
     func updateAudioFiles(_ newAudioFiles: [URL]) {
         urls = newAudioFiles

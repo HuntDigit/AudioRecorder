@@ -11,7 +11,7 @@
 		CA920DA02E7E1DE900B99641 /* AudioRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920D992E7E1DE900B99641 /* AudioRecorderApp.swift */; };
 		CA920DA12E7E1DE900B99641 /* AudioRecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920D9A2E7E1DE900B99641 /* AudioRecorderViewModel.swift */; };
 		CA920DA22E7E1DE900B99641 /* AudioTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920D9B2E7E1DE900B99641 /* AudioTool.swift */; };
-		CA920DA32E7E1DE900B99641 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920D9C2E7E1DE900B99641 /* ContentView.swift */; };
+		CA920DA32E7E1DE900B99641 /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920D9C2E7E1DE900B99641 /* AudioRecorderView.swift */; };
 		CA920DA42E7E1DE900B99641 /* SegmentAudioWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920D9D2E7E1DE900B99641 /* SegmentAudioWriter.swift */; };
 		CA920DA52E7E1DE900B99641 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA920D962E7E1DE900B99641 /* Assets.xcassets */; };
 		CA920DAC2E7E273100B99641 /* DependenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA920DAB2E7E272400B99641 /* DependenciesManager.swift */; };
@@ -25,7 +25,7 @@
 		CA920D992E7E1DE900B99641 /* AudioRecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderApp.swift; sourceTree = "<group>"; };
 		CA920D9A2E7E1DE900B99641 /* AudioRecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewModel.swift; sourceTree = "<group>"; };
 		CA920D9B2E7E1DE900B99641 /* AudioTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTool.swift; sourceTree = "<group>"; };
-		CA920D9C2E7E1DE900B99641 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CA920D9C2E7E1DE900B99641 /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
 		CA920D9D2E7E1DE900B99641 /* SegmentAudioWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentAudioWriter.swift; sourceTree = "<group>"; };
 		CA920DAB2E7E272400B99641 /* DependenciesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesManager.swift; sourceTree = "<group>"; };
 		CA9BFA012E806D06000FC0EC /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
@@ -46,8 +46,8 @@
 		CA920D9E2E7E1DE900B99641 /* AudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				CA920DA82E7E24CE00B99641 /* Utility */,
 				CA920DA72E7E24B400B99641 /* Resources */,
+				CA920DA82E7E24CE00B99641 /* Utility */,
 				CA920DAA2E7E252C00B99641 /* MainScreen */,
 				CA920DA62E7E249A00B99641 /* MainApp */,
 			);
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				CA920DA92E7E251A00B99641 /* ViewModel */,
-				CA920D9C2E7E1DE900B99641 /* ContentView.swift */,
+				CA920D9C2E7E1DE900B99641 /* AudioRecorderView.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -196,7 +196,7 @@
 				CA9BFA022E806D0C000FC0EC /* AudioPlayer.swift in Sources */,
 				CA920DA12E7E1DE900B99641 /* AudioRecorderViewModel.swift in Sources */,
 				CA920DA22E7E1DE900B99641 /* AudioTool.swift in Sources */,
-				CA920DA32E7E1DE900B99641 /* ContentView.swift in Sources */,
+				CA920DA32E7E1DE900B99641 /* AudioRecorderView.swift in Sources */,
 				CA920DA42E7E1DE900B99641 /* SegmentAudioWriter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

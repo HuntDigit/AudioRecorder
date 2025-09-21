@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AudioRecorderView.swift
 //  AudioRecorder
 //
 //  Created by Andrii Sabinin on 17.09.2025.
@@ -12,7 +12,7 @@ enum ScreenType: CaseIterable {
     case player
 }
 
-struct ContentView: View {
+struct AudioRecorderView: View {
     @StateObject var model: SystemAudioRecorder
     @StateObject private var audioPlayer = AudioPlayer()
     @State private var isPlaing: Bool = false
@@ -173,7 +173,7 @@ struct ContentView: View {
     }
 }
 
-extension ContentView {
+extension AudioRecorderView {
     
     func taskUpdate() {
         Task {
@@ -219,5 +219,5 @@ extension ContentView {
 
 #Preview {
     let depMen = DependenciesManager()
-    ContentView(model: depMen.systemAudioRecorder)
+    AudioRecorderView(model: depMen.systemAudioRecorder)
 }

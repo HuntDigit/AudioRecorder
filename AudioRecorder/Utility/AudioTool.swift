@@ -31,12 +31,16 @@ struct AudioSettingsConfig {
         self.segmentDurationSeconds = segmentDurationSeconds
     }
     
-    static let defaultConfig = AudioSettingsConfig(sampleRate: 48000,
-                                                   channelCount: 1,
-                                                   segmentDurationSeconds: 10.0)
+    static let defaultConfig = Self.init(sampleRate: 48000,
+                                         channelCount: 1,
+                                         segmentDurationSeconds: 10.0)
 }
 
 struct AudioTool  {
+    
+    // Apple often uses 600 as the "default" timescale, let it be
+    static let defaultPreferredTimescale: CMTimeScale = 600
+    
     static func getTimeDuration(buffer: CMSampleBuffer) -> Double {
         CMSampleBufferGetPresentationTimeStamp(buffer).seconds
     }
@@ -57,11 +61,13 @@ struct AudioTool  {
         let formatDesc = pcmBuffer.format.formatDescription
         
         let frameCount = CMItemCount(pcmBuffer.frameLength)
-        //        let channels = Int(pcmBuffer.format.channelCount)
+        
+        // We have obly 1 chanel, for test we may not use it
+        // let channels = Int(pcmBuffer.format.channelCount)
+        
         let bytesPerFrame = Int(pcmBuffer.format.streamDescription.pointee.mBytesPerFrame)
         let dataSize = Int(pcmBuffer.frameLength) * bytesPerFrame
         
-        // Create CMBlockBuffer from PCM data
         var blockBuffer: CMBlockBuffer?
         let statusBB = CMBlockBufferCreateWithMemoryBlock(
             allocator: kCFAllocatorDefault,
@@ -80,15 +86,13 @@ struct AudioTool  {
             return nil
         }
         
-        // Calculate timin
         let ptsSeconds = Double(time.sampleTime) / pcmBuffer.format.sampleRate
         var timing = CMSampleTimingInfo(
             duration: CMTime(value: 1, timescale: CMTimeScale(pcmBuffer.format.sampleRate)),
-            presentationTimeStamp: CMTime(seconds: ptsSeconds, preferredTimescale: 600),
+            presentationTimeStamp: CMTime(seconds: ptsSeconds, preferredTimescale: Self.defaultPreferredTimescale),
             decodeTimeStamp: CMTime.invalid
         )
         
-        // Create CMSampleBuffer
         var sampleBuffer: CMSampleBuffer?
         let statusSB = CMSampleBufferCreate(
             allocator: kCFAllocatorDefault,
