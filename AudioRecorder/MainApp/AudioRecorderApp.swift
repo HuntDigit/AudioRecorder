@@ -16,6 +16,7 @@ struct AudioRecorderApp: App {
         WindowGroup {
             AudioRecorderView(model: diManager.systemAudioRecorder)
         }
+        .environmentObject(diManager)
         .windowResizability(.contentSize)
         .defaultSize(width: 600, height: 400)
                 

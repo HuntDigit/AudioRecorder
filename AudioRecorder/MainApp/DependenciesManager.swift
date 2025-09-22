@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DependenciesManager {
+final class DependenciesManager: ObservableObject {
     var systemAudioRecorder: SystemAudioRecorder {
         get {
             if let recorder = _systemAudioRecorder {

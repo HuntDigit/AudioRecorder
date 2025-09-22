@@ -13,11 +13,15 @@ enum ScreenType: CaseIterable {
 }
 
 struct AudioRecorderView: View {
+    
+    @EnvironmentObject var diManager: DependenciesManager
+
     @StateObject var model: SystemAudioRecorder
     @StateObject private var audioPlayer = AudioPlayer()
     @State private var isPlaing: Bool = false
     @State private var selection: ScreenType = .recording
 
+    
     var body: some View {
         NavigationSplitView {
             List(selection: $selection) {
@@ -37,6 +41,19 @@ struct AudioRecorderView: View {
                     .navigationTitle(Text("Audio Recorder"))
             case .player:
                 playerView
+                    .toolbar {
+                        ToolbarItem(placement: .automatic) {
+                            Button {
+                                openFolder()
+                            } label: {
+                                HStack {
+                                    Text("Open Location")
+                                    Image(systemName: "folder")
+                                }
+                                .padding(4)
+                            }
+                        }
+                    }
                     .navigationTitle(Text("Audio Palyer"))
             }
         }
@@ -171,6 +188,10 @@ struct AudioRecorderView: View {
         model.updateListOfFiles()
         audioPlayer.updateAudioFiles(model.litOfFiles)
     }
+    
+    func openFolder() {
+        diManager.audioFileManager.openPrefferedDirectory()
+    }
 }
 
 extension AudioRecorderView {
@@ -178,7 +199,7 @@ extension AudioRecorderView {
     func taskUpdate() {
         Task {
             do {
-                try await model.updateStreamSettings()
+//                try await model.updateStreamSettings()
             } catch {
                 print(error.localizedDescription)
             }
@@ -188,7 +209,7 @@ extension AudioRecorderView {
     func taskSetup() {
         Task {
             do {
-                try await model.setupStream()
+//                try await model.setupStream()
             } catch {
                 print(error.localizedDescription)
             }

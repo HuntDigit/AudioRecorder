@@ -5,6 +5,7 @@
 //  Created by Andrii Sabinin on 19.09.2025.
 //
 
+import AppKit
 import Foundation
 
 enum AudioFileForamts: String {
@@ -26,6 +27,12 @@ class AudioFileManager {
         self.fformat = ff
     }
     
+    init(prefferedDirectory: URL? = nil, filesFromPD: [URL] = [], fformat: AudioFileForamts = .wav) {
+        self.prefferedDirectory = prefferedDirectory ?? Self.defaultDirectoryURL
+        self.filesFromPD = filesFromPD
+        self.fformat = fformat
+    }
+    
     func setFilenameForCurrentDirectory(_ filename: String) -> URL {
         var directory = Self.defaultDirectoryURL
         if let prefferedDirectory = prefferedDirectory { directory = prefferedDirectory }
@@ -41,6 +48,15 @@ class AudioFileManager {
         }
         
         return filesFromPD
+    }
+    
+    func openPrefferedDirectory() {
+        guard let path = self.prefferedDirectory,
+        FileManager.default.fileExists(atPath: path.path(), isDirectory: nil) else {
+            print("No such directory")
+            return
+        }
+        NSWorkspace.shared.open(path)
     }
 }
 
